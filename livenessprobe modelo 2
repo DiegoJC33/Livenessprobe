@@ -1,0 +1,47 @@
+Aqui está um exemplo de arquivo YAML que configura um Liveness Probe HTTP básico:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app-container
+    image: my-app-image
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 3
+
+
+Algumas coisas que você precisará substituir ou personalizar neste exemplo:
+
+my-app: Substitua este valor pelo nome do seu pod.
+
+my-app-container: Substitua este valor pelo nome do container que hospeda sua aplicação.
+
+my-app-image: Substitua este valor pelo nome da imagem da sua aplicação.
+
+8080: Substitua estes valores pelas portas corretas do container onde sua aplicação está rodando.
+
+/health: Substitua este valor pelo caminho da rota de saúde que sua aplicação fornece.
+
+initialDelaySeconds: Este valor é opcional e especifica o quanto tempo, em segundos, o Kubernetes esperará antes de iniciar a primeira verificação de saúde.
+
+periodSeconds: Este valor especifica o intervalo de tempo, em segundos, entre as verificações de saúde.
+
+timeoutSeconds: Este valor especifica o quanto tempo, em segundos, o Kubernetes esperará pela resposta da verificação de saúde antes de considerá-la como falha.
+
+successThreshold: Este valor especifica o número de tentativas de verificação de saúde consecutivas bem-sucedidas necessárias antes que o Kubernetes considere o pod saudável novamente.
+
+failureThreshold: Este valor especifica o número de tentativas de verificação de saúde consecutivas sem sucesso necessárias antes que o Kubernetes considere o pod como doente e tome medidas de recuperação.
+
+Este é um exemplo básico de como configurar um Liveness Probe HTTP, e ele pode ser personalizado de acordo com suas necessidades. Além disso, existem outros tipos de probes como o comando ou TCP probe, e é importante estudar a documentação do Kubernetes e as melhores práticas.
