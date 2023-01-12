@@ -1,0 +1,130 @@
+Aqui estão alguns exemplos de arquivos YAML que configuram diferentes tipos de Liveness Probes:
+
+HTTP Liveness Probe:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app-container
+    image: my-app-image
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      timeoutSeconds: 5
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+TCP Liveness Probe:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app-container
+    image: my-app-image
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+TCP Liveness Probe:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app-container
+    image: my-app-image
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Comando Liveness Probe:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app-container
+    image: my-app-image
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 15
+      periodSeconds: 10
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app  # Substituir pelo nome do seu pod
+spec:
+  containers:
+  - name: my-app-container  # Substituir pelo nome do container que hospeda sua aplicação
+    image: my-app-image  # Substituir pelo nome da imagem da sua aplicação
+    ports:
+    - containerPort: 8080  # Substituir pelas portas corretas do container onde sua aplicação está rodando
+    livenessProbe:
+      httpGet:
+        path: /health  # Substituir pelo caminho da rota de saúde que sua aplicação fornece
+        port: 8080  # Substituir pelas portas corretas do container onde sua aplicação está rodando
+      initialDelaySeconds: 15  # Este valor é opcional e especifica o quanto tempo, em segundos, o Kubernetes esperará antes de iniciar a primeira verificação de saúde
+      periodSeconds: 10  # Este valor especifica o intervalo de tempo, em segundos, entre as verificações de saúde
+      timeoutSeconds: 5  # Este valor especifica o quanto tempo, em segundos, o Kubernetes esperará pela resposta da verificação de saúde antes de considerá-la como falha
+      
+----------------------------------------------------------------------------------------------------------------------------
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app # Substituir pelo nome do seu pod
+spec:
+  containers:
+  - name: my-app-container # Substituir pelo nome do container que hospeda sua aplicação
+    image: my-app-image # Substituir pelo nome da imagem da sua aplicação
+    ports:
+    - containerPort: 8080 # Substituir pelas portas corretas do container onde sua aplicação está rodando
+    livenessProbe:
+      tcpSocket:
+        port: 8080 # Substituir pelas portas corretas do container onde sua aplicação está rodando
+      initialDelaySeconds: 30 # Este valor especifica o quanto tempo, em segundos, o Kubernetes esperará antes de iniciar a primeira verificação de saúde
+      periodSeconds: 30 # Este valor especifica o intervalo de tempo, em segundos, entre as verificações de saúde
+
