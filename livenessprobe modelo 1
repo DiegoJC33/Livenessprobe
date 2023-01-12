@@ -1,0 +1,36 @@
+Um Liveness Probe é uma maneira de garantir que um pod (container) no Kubernetes esteja funcionando corretamente. Ele faz isso verificando se o aplicativo dentro do pod responde de forma adequada à uma solicitação de verificação, e se o pod não responder, o Kubernetes pode reiniciar ou recriar o pod.
+
+Aqui estão os passos gerais para configurar um Liveness Probe em um pod Kubernetes:
+
+Identifique a rota de verificação: Escolha uma rota dentro do aplicativo que pode ser usada para verificar se o pod está funcionando corretamente. Isso pode ser uma rota HTTP, TCP ou um comando executado dentro do container.
+
+Crie um arquivo de configuração de Probes: Adicione um arquivo de configuração YAML para o seu aplicativo, onde você especificará as configurações do Liveness Probe. Aqui está um exemplo de configuração para um Liveness Probe HTTP:
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+
+
+Aplique a configuração do Liveness Probe: Use o comando kubectl para aplicar as configurações de Liveness Probe ao seu pod. Exemplo:
+
+kubectl apply -f my-pod-config.yaml
+
+
+Verificar o status de Liveness: Use o comando kubectl para verificar o status do seu pod e do Liveness Probe. Exemplo:
+
+kubectl get pods
+
+
+Lembre-se que esses são passos gerais e existem muitas outras configurações e opções disponíveis para configurar um Liveness Probe, incluindo configurações de timeout, execução de comando dentro do container, e falha de thresholds. Recomendo dar uma olhada na documentação oficial.
